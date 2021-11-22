@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  db:
+    image: 'mongo'
+    container_name: 'graph-ql-base'
+    ports:
+      - '27017-27019:27017-27019'
+    environment:
+      - MONGO_INITDB_DATABASE=graphqlbase
+      - MONGO_INITDB_ROOT_USERNAME=graph
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    ports:
+      - '3001:3000'
+volumes:
+  data:
+

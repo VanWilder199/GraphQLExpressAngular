@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const {graphqlHTTP} = require("express-graphql");
-const {schemaComposer} = require("graphql-compose");
+
 const graphqlSchema = require("./schemaGraphQL/userBookComposer")
 const logger = require("./logger/log")
 
@@ -18,7 +18,7 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 const start = async () => {
-    await mongoose.connect('mongodb://localhost:27888/graphql');
+    await mongoose.connect('mongodb://vanwilder:1234567@172.18.0.1:27017/graphqlbase');
     app.listen(port, () => {
         console.log(`Running on port ${port}`)
     });
